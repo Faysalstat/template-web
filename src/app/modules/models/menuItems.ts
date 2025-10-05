@@ -2,81 +2,63 @@ export const MENUITEM = [
     {
       label: 'Home',
       items: [
-        { label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/'] },
+        { label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/admin'] },
       ],
     },
     {
       label: 'Modules',
       items: [
         {
-          label: 'Sales',
+          label: 'Product',
           icon: 'pi pi-fw pi-cart-plus',
           items: [
             {
-              label: 'Invoice List',
+              label: 'Product List',
               icon: 'pi pi-fw pi-list',
+              routerLink: ['/admin/product/list'],
             },
             {
-              label: 'Sales Report',
-              icon: 'pi pi-fw pi-file-pdf',
+              label: 'Add Product',
+              icon: 'pi pi-fw pi-plus',
+              routerLink: ['/admin/product/add'],
             },
           ],
         },
         {
-          label: 'Supply',
+          label: 'Inventory',
+          icon: 'pi pi-fw pi-cart-plus',
+          items: [
+            {
+              label: 'Add Stock',
+              icon: 'pi pi-fw pi-plus',
+              routerLink: ['/admin/inventory/add-stock'],
+            },
+          ],
+        },
+        {
+          label: 'Configs',
           icon: 'pi pi-fw pi-truck',
           items: [
             {
-              label: 'Invoice List',
+              label: 'Manage Configs',
               icon: 'pi pi-fw pi-list',
-            },
-            {
-              label: 'Supply Report',
-              icon: 'pi pi-fw pi-file-pdf',
+              routerLink: ['/admin/config'],
             },
           ],
         },
         {
-          label: 'Clients',
+          label: 'Reports',
           icon: 'pi pi-fw pi-users',
           items: [
             {
-              label: 'Customers',
+              label: 'Product Report',
               icon: 'pi pi-fw pi-list',
+              routerLink: ['/comunity/add'],
             },
             {
-              label: 'Suppliers',
+              label: 'Transactions',
               icon: 'pi pi-fw pi-list',
-            },
-            {
-              label: 'Employees',
-              icon: 'pi pi-fw pi-list',
-            },
-            {
-              label: 'Loan Clients',
-              icon: 'pi pi-fw pi-list',
-            },
-            {
-              label: 'Users',
-              icon: 'pi pi-fw pi-users',
-            },
-          ],
-        },
-        {
-          label: 'Transaction',
-          icon: 'pi pi-fw pi-wallet',
-          items: [
-            {
-              label: 'Cash',
-              icon: 'pi pi-fw pi-wallet',
-            },
-            {
-              label: 'Expense',
-              icon: 'pi pi-fw pi-chart-line',
-            },
-            {
-              label: 'Loan',
-              icon: 'pi pi-fw pi-calendar-plus',
+              routerLink: ['/comunity/list'],
             }
           ],
         }
@@ -92,7 +74,7 @@ export const MENUITEM = [
         },
         {
           label: 'Tutorials',
-          icon: 'pi pi-fw pi-question',
+          icon: 'pi pi-fw pi-sitemap',
           routerLink: ['/documentation'],
         },
       ],

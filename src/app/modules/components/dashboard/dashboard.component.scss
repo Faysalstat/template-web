@@ -1,0 +1,55 @@
+/* order-dashboard.component.scss */
+.orders-container {
+  margin: 16px;
+}
+
+.order-card {
+  margin-bottom: 20px;
+  padding: 12px;
+}
+
+.order-no {
+  font-weight: bold;
+  font-size: 18px;
+  color: #2c3e50;
+}
+
+.product-name {
+  font-weight: bold;
+  color: #1976d2;
+}
+
+.stepper-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+}
+
+.step {
+  flex: 1;
+  text-align: center;
+  padding: 8px;
+  border-bottom: 3px solid #ccc;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.step.completed {
+  border-color: #4caf50; /* green */
+  color: #4caf50;
+  font-weight: bold;
+}
+
+.step.active {
+  border-color: #1976d2; /* blue */
+  color: #1976d2;
+  font-weight: bold;
+}
+
+.step.disabled {
+  color: #9e9e9e;
+}
+
+.step-actions {
+  margin-top: 8px;
+}

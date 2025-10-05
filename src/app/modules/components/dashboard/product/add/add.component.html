@@ -1,0 +1,129 @@
+<p-toast  [breakpoints]="{ '920px': { width: '100%', right: '0', left: '0' } }" />
+<h1>Add product</h1>
+<hr>
+<form [formGroup]="productAddingForm">
+    <div class="row">
+        <div class="col-md-3" style="padding: 10px;">
+            <div class="card bg-success text-white">
+                <div class="card-body">Total Stock: <span>{{product?.quantity}}</span></div>
+            </div>
+        </div>
+        <div class="col-md-3" style="padding: 10px;">
+            <div class="card bg-info text-white">
+                <div class="card-body">Total Sold: <span>{{product?.quantitySold || 0}}</span></div>
+            </div>
+        </div>
+        <div class="col-md-3" style="padding: 10px;">
+            <div class="card bg-danger text-white">
+                <div class="card-body">Total Damaged: <span>{{product?.quantityDamaged || 0}}</span></div>
+            </div>
+        </div>
+        <div class="col-md-3" style="padding: 10px;">
+            <div class="card bg-warning text-white">
+                <div class="card-body">Total Returned: <span>{{product?.quantityReturn || 0}}</span></div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card img-box">
+                <img [src]="productImageUrl" class="rounded" alt="Product Image" width="304" height="236">
+            </div>
+        </div>
+        <div class="col-md-4 d-flex align-items-center">
+            <input type="file" accept="image/*" class="form-control-file" (change)="onFileSelected($event)">
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col-md-4">
+            <mat-form-field class="input-field" appearance="outline">
+                <mat-label>Product Code</mat-label>
+                <input formControlName="productCode" (change)="checkDuplicateProduct()" placeholder="Product Code" matInput>
+            </mat-form-field>
+        </div>
+        <div class="col-md-8">
+            <mat-form-field class="input-field" appearance="outline">
+                <mat-label>Product Name</mat-label>
+                <input formControlName="productName" placeholder="Product Name" matInput>
+            </mat-form-field>
+        </div>
+        <div class="col-md-4">
+            <mat-form-field class="input-field" appearance="outline">
+                <mat-label>Brand Name</mat-label>
+                <mat-select formControlName="brandName">
+                    <mat-option *ngFor="let brand of brandNames" [value]="brand.value">{{brand?.label}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col-md-4">
+            <mat-form-field appearance="outline" class="input-field">
+                <mat-label>Product Category</mat-label>
+                <mat-select formControlName="productCategory">
+                    <mat-option *ngFor="let cat of categories" [value]="cat.value">{{cat?.label}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col-md-4">
+            <mat-form-field appearance="outline" class="input-field">
+                <mat-label>Unit Type</mat-label>
+                <mat-select formControlName="unitType">
+                    <mat-option *ngFor="let unit of units" [value]="unit.value">{{unit?.label}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col-md-4">
+            <mat-form-field appearance="outline" class="input-field">
+                <mat-label>Cost Price</mat-label>
+                <input formControlName="costPricePerUnit" placeholder="Cost Price" matInput>
+            </mat-form-field>
+        </div>
+        <div class="col-md-4">
+            <mat-form-field appearance="outline" class="input-field">
+                <mat-label>Selling Price</mat-label>
+                <input formControlName="sellingPricePerUnit" placeholder="Selling Price" matInput>
+            </mat-form-field>
+        </div>
+        <div class="col-md-4">
+            <mat-checkbox class="example-margin" [ngModelOptions]="{standalone: true}" [(ngModel)]="checked">Variants</mat-checkbox>
+        </div>
+        <div *ngIf="checked" class="col-md-12 mt-5">
+            <div class="row">
+                <div class="col-md-4">
+                    <mat-form-field class="input-field" appearance="outline">
+                        <mat-label>Variant Name</mat-label>
+                        <input matInput placeholder="Variant Name" [ngModelOptions]="{standalone: true}" [(ngModel)]="variantName">
+                    </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                    <button (click)="addVariant()" mat-raised-button color="primary" style="margin-top: 10px;">Add Variant</button>
+                </div>
+            </div>
+            <div *ngIf="variants.length > 0" class="col-md-12">
+                <table class="table table-bordered" >
+                    <thead>
+                        <tr>
+                            <th>Variant Name</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let variant of variants; let i = index">
+                            <td>{{ variant.name }}</td>
+                            <td><button (click)="variants.splice(i, 1)" mat-button color="warn">Remove</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p *ngIf="variants.length === 0">No variants added yet.</p>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <p style="color: red;font-weight: bold;">{{errMsg}}</p>
+        </div>
+        <div class="col-md-12">
+            <button (click)="addProduct()" mat-raised-button color="warn">{{isEdit?"Update Product":"Add Product"}}</button>
+        </div>
+    </div>
+</form>

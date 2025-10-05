@@ -5,17 +5,14 @@ import { NotfoundComponent } from './modules/components/notfound/notfound.compon
 import { AppAuthGuard } from './app-auth.guard';
 
 const routes: Routes = [
+  { path: '', loadChildren: () => import('./modules/components/shop/shop.module').then(m => m.ShopModule) },
   {
-      path: '',canActivate:[AppAuthGuard],component: AppLayoutComponent,
+      path: 'admin',canActivate:[AppAuthGuard],component: AppLayoutComponent,
       children: [
           { path: '', loadChildren: () => import('./modules/components/dashboard/dashboard.module').then(m => m.DashboardModule) },
-          { path: 'uikit', loadChildren: () => import('./modules/components/uikit/uikit.module').then(m => m.UIkitModule) },
-          { path: 'utilities', loadChildren: () => import('./modules/components/utilities/utilities.module').then(m => m.UtilitiesModule) },
-          { path: 'documentation', loadChildren: () => import('./modules/components/documentation/documentation.module').then(m => m.DocumentationModule) },
-          { path: 'blocks', loadChildren: () => import('./modules/components/primeblocks/primeblocks.module').then(m => m.PrimeBlocksModule) },
-          { path: 'pages', loadChildren: () => import('./modules/components/pages/pages.module').then(m => m.PagesModule) }
       ]
   },
+  
   { path: 'auth', loadChildren: () => import('./modules/auth/auth.module').then(m => m.AuthModule) },
   { path: 'landing', loadChildren: () => import('./modules/components/landing/landing.module').then(m => m.LandingModule) },
   { path: 'notfound', component: NotfoundComponent },

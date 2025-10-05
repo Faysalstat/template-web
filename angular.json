@@ -28,7 +28,9 @@
               "src/assets"
           ],
           "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/assets/layout/styles/shop/css/style.css",
+              "src/assets/layout/styles/shop/css/font-awesome.css"
           ],
           "scripts": [
               "node_modules/prismjs/prism.js",

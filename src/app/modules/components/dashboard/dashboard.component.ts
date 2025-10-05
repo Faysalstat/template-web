@@ -1,103 +1,84 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { MenuItem } from 'primeng/api';
-import { Subscription } from 'rxjs';
-import { Product } from '../../models/product';
-import { ProductService } from '../../shared-services/product.service';
-import { LayoutService } from '../../layout/service/app.layout.service';
+import { Component } from '@angular/core';
+import { OrderService } from '../../shared-services/order.service';
+interface Order {
+  orderNo: string;
+  productCode: string;
+  productName: string;
+  variant: string;
+  quantity: number;
+  deliveryType: string;
+  address: string;
+  total: number;
+  shipping: number;
+  discount: number;
+  paymentType: string;
+  status: string;
+}
 
 @Component({
     templateUrl: './dashboard.component.html',
+    styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit, OnDestroy {
 
-    items!: MenuItem[];
+export class DashboardComponent {
 
-    products!: Product[];
+orderStatuses = ["PENDING", "CONFIRMED", "SHIPPED", "DELIVERED", "CANCELLED"];
 
-    chartData: any;
-
-    chartOptions: any;
-
-    subscription!: Subscription;
-
-    constructor(private productService: ProductService, public layoutService: LayoutService) {
-        this.subscription = this.layoutService.configUpdate$.subscribe(() => {
-            this.initChart();
-        });
+  orders: Order[] = [
+    {
+      orderNo: 'ORD-1001',
+      productCode: 'P001',
+      productName: 'T-Shirt',
+      variant: 'Blue - XL',
+      quantity: 2,
+      deliveryType: 'Inside Dhaka',
+      address: 'Banani, Dhaka',
+      total: 1000,
+      shipping: 60,
+      discount: 10,
+      paymentType: 'COD',
+      status: 'PENDING'
+    },
+    {
+      orderNo: 'ORD-1002',
+      productCode: 'P002',
+      productName: 'Shoes',
+      variant: 'Black - 42',
+      quantity: 1,
+      deliveryType: 'Outside Dhaka',
+      address: 'Chittagong',
+      total: 2200,
+      shipping: 120,
+      discount: 0,
+      paymentType: 'COD',
+      status: 'CONFIRMED'
     }
+  ];
+constructor(private orderService: OrderService) {}
+  getDiscountedTotal(order: Order): number {
+    return order.total + order.shipping - order.discount;
+  }
 
-    ngOnInit() {
-        this.initChart();
-        this.productService.getProductsSmall().then(data => this.products = data);
+  updateOrderStatus(order: Order, nextStatus: string) {
+    const currentIndex = this.orderStatuses.indexOf(order.status);
+    const nextIndex = this.orderStatuses.indexOf(nextStatus);
 
-        this.items = [
-            { label: 'Add New', icon: 'pi pi-fw pi-plus' },
-            { label: 'Remove', icon: 'pi pi-fw pi-minus' }
-        ];
-    }
+    if (nextStatus === 'CANCELLED' || nextIndex === currentIndex + 1) {
+      // optimistic UI update
+      const oldStatus = order.status;
+      order.status = nextStatus;
 
-    initChart() {
-        const documentStyle = getComputedStyle(document.documentElement);
-        const textColor = documentStyle.getPropertyValue('--text-color');
-        const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
-        const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
-
-        this.chartData = {
-            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-            datasets: [
-                {
-                    label: 'First Dataset',
-                    data: [65, 59, 80, 81, 56, 55, 40],
-                    fill: false,
-                    backgroundColor: documentStyle.getPropertyValue('--bluegray-700'),
-                    borderColor: documentStyle.getPropertyValue('--bluegray-700'),
-                    tension: .4
-                },
-                {
-                    label: 'Second Dataset',
-                    data: [28, 48, 40, 19, 86, 27, 90],
-                    fill: false,
-                    backgroundColor: documentStyle.getPropertyValue('--green-600'),
-                    borderColor: documentStyle.getPropertyValue('--green-600'),
-                    tension: .4
-                }
-            ]
-        };
-
-        this.chartOptions = {
-            plugins: {
-                legend: {
-                    labels: {
-                        color: textColor
-                    }
-                }
-            },
-            scales: {
-                x: {
-                    ticks: {
-                        color: textColorSecondary
-                    },
-                    grid: {
-                        color: surfaceBorder,
-                        drawBorder: false
-                    }
-                },
-                y: {
-                    ticks: {
-                        color: textColorSecondary
-                    },
-                    grid: {
-                        color: surfaceBorder,
-                        drawBorder: false
-                    }
-                }
-            }
-        };
-    }
-
-    ngOnDestroy() {
-        if (this.subscription) {
-            this.subscription.unsubscribe();
+      // service call
+      this.orderService.updateStatus(order.orderNo, nextStatus).subscribe({
+        next: () => {
+          console.log(`Order ${order.orderNo} updated to ${nextStatus}`);
+        },
+        error: (err) => {
+          console.error('Failed to update order status', err);
+          // rollback on error
+          order.status = oldStatus;
         }
+      });
     }
+  }
 }

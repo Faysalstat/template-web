@@ -1,0 +1,95 @@
+:host {
+  display: block;
+  padding: 20px;
+}
+
+.card {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: none;
+  border-radius: 8px;
+}
+
+.card-header {
+  border-radius: 8px 8px 0 0 !important;
+}
+
+.variants-section {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #dee2e6;
+}
+
+.table {
+  margin-bottom: 0;
+  
+  th {
+    font-weight: 600;
+    background-color: #e9ecef;
+  }
+  
+  td {
+    vertical-align: middle;
+  }
+}
+
+mat-form-field {
+  margin-bottom: 8px;
+}
+
+.total-cost-input {
+  font-weight: bold;
+  font-size: 1.1em;
+  color: #007bff;
+}
+
+.submit-btn {
+  min-width: 150px;
+  padding: 12px 24px;
+  font-weight: 600;
+  
+  mat-icon {
+    margin-right: 8px;
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .container {
+    padding: 0;
+  }
+  
+  .card-body {
+    padding: 15px;
+  }
+  
+  .table-responsive {
+    font-size: 0.9em;
+  }
+}
+
+// Material form field customization
+::ng-deep {
+  .mat-form-field-outline {
+    border-radius: 8px;
+  }
+  
+  .mat-form-field-appearance-outline .mat-form-field-outline {
+    color: #dee2e6;
+  }
+  
+  .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+    color: #007bff;
+  }
+}
+
+// Hover effects
+mat-form-field:hover {
+  transform: translateY(-1px);
+  transition: transform 0.2s ease;
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px);
+  transition: transform 0.2s ease;
+}
