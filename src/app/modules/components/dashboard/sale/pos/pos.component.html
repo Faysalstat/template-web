@@ -1,0 +1,133 @@
+<p-toast />
+<p class="h1">Place Order</p>
+<div class="card-body mt-3">
+    <form [formGroup]="saleOrderForm" (ngSubmit)="onSubmit()">
+        <!-- Supplier Input -->
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Customer Name</mat-label>
+                    <input matInput formControlName="customerName" placeholder="Enter customer name">
+                    <mat-error *ngIf="saleOrderForm.get('customerName')?.hasError('required')">
+                        Customer is required
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-3">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Customer Phone</mat-label>
+                    <input matInput formControlName="phone" placeholder="Enter customer phone">
+                    <mat-error *ngIf="saleOrderForm.get('phone')?.hasError('required')">
+                        Phone number is required
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-3">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Customer Email</mat-label>
+                    <input matInput formControlName="email" placeholder="Enter customer email">
+                </mat-form-field>
+            </div>
+            <div class="col-md-12">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Shipping Address</mat-label>
+                    <textarea matInput formControlName="address" rows="3"></textarea>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <!-- Product Search Dropdown -->
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Product Code + Name</mat-label>
+                    <input type="text" matInput formControlName="selectedProduct" [matAutocomplete]="auto"
+                        placeholder="Search products...">
+                    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayProduct"
+                        (optionSelected)="onProductSelected($event.option.value)">
+                        <mat-option *ngFor="let option of filteredProducts | async" [value]="option.product">
+                            {{ option.display }}
+                        </mat-option>
+                    </mat-autocomplete>
+                    <mat-icon matSuffix>search</mat-icon>
+                </mat-form-field>
+            </div>
+            <div class="col-md-12">
+                <div class="w-100 mb-3">
+                    <mat-label>Select varient</mat-label>
+                    <mat-radio-group formControlName="selectedVariant" aria-label="Choose Variant">
+                        <mat-radio-button *ngFor="let variant of variants;" [value]="variant">
+                            {{variant.name}}
+                        </mat-radio-button>
+                    </mat-radio-group>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="w-100 mb-3">
+                    <mat-label>Delivery In</mat-label>
+                    <mat-radio-group (change)="onSelectionDeliveryLocation($event)" aria-label="Choose Variant">
+                        <mat-radio-button value="Inside">
+                            Inside Dhaka (80 Taka)
+                        </mat-radio-button>
+                        <mat-radio-button value="Outside">
+                            Outside Dhaka (120 Taka)
+                        </mat-radio-button>
+                    </mat-radio-group>
+                </div>
+            </div>
+            <div class="col-md-4 d-flex align-items-center">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Price ($)</mat-label>
+                    <input matInput type="number" formControlName="pricePerUnit" min="0" placeholder="Price" readonly>
+                </mat-form-field>
+            </div>
+            <div class="col-md-4 d-flex align-items-center">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Quantity</mat-label>
+                    <input matInput type="number" formControlName="quantity" min="0" placeholder="Quantity">
+                </mat-form-field>
+            </div>
+            <div class="col-md-4 d-flex align-items-center">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Shipping Cost</mat-label>
+                    <input matInput type="number" formControlName="shippingCost" min="0" placeholder="Price">
+                </mat-form-field>
+            </div>
+            <div class="col-md-4 d-flex align-items-center">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Other Cost</mat-label>
+                    <input matInput type="number" formControlName="otherCost" min="0" placeholder="Price">
+                </mat-form-field>
+            </div>
+            <div class="col-md-4 d-flex align-items-center">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Other Cost Reason</mat-label>
+                    <input matInput type="text" formControlName="otherCostReason" placeholder="Price">
+                </mat-form-field>
+            </div>
+            <div class="col-md-4 d-flex align-items-center">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Total Payable</mat-label>
+                    <input matInput type="text" formControlName="totalPayable" placeholder="Price">
+                </mat-form-field>
+            </div>
+            <div class="col-md-4 d-flex align-items-center">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Payment Method</mat-label>
+                    <mat-select formControlName="paymentMethod">
+                        <mat-option *ngFor="let method of methods" [value]="method.value">
+                            {{method.label}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="col-md-12">
+                <button mat-raised-button color="primary" type="submit" [disabled]="!saleOrderForm.valid"
+                    class="submit-btn">
+                    <mat-icon>save</mat-icon>
+                    Place Order
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

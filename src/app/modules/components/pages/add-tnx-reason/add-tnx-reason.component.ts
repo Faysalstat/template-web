@@ -27,7 +27,7 @@ export class AddTnxReasonComponent implements OnInit {
     }
     params.set("model",model);
     this.tnxService.addTransactionReason(params).subscribe({
-      next:(res)=>{
+      next:(res:any)=>{
         if(res.body){
           this.tnxReason = '';
           this.notificationService.showMessage("SUCCESS",res.message,"OK",500);
@@ -38,7 +38,7 @@ export class AddTnxReasonComponent implements OnInit {
   }
   fetchTransactionReasons(){
     this.tnxService.fetchAllTransactionReason().subscribe({
-      next:(res)=>{
+      next:(res:any)=>{
         if(res.body){
           this.reasons = res.body;
         }
@@ -47,7 +47,7 @@ export class AddTnxReasonComponent implements OnInit {
   }
   deleteItem(id:any){
     this.tnxService.deleteTransactionReason(id).subscribe({
-      next:(res)=>{
+      next:(res:any)=>{
         if(res.isSuccess){
           console.log("Successfully Deleted");
           this.notificationService.showErrorMessage("SUCCESS","Deleted Item","Ok",500);

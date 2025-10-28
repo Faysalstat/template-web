@@ -33,6 +33,27 @@ export const MENUITEM = [
               icon: 'pi pi-fw pi-plus',
               routerLink: ['/admin/inventory/add-stock'],
             },
+                        {
+              label: 'Supply Order List',
+              icon: 'pi pi-fw pi-list',
+              routerLink: ['/admin/inventory/orders'],
+            },
+          ],
+        },
+         {
+          label: 'Sale',
+          icon: 'pi pi-fw pi-cart-plus',
+          items: [
+            {
+              label: 'Place Order',
+              icon: 'pi pi-fw pi-plus',
+              routerLink: ['/admin/sale/pos'],
+            },
+                        {
+              label: 'Order List',
+              icon: 'pi pi-fw pi-list',
+              routerLink: ['/admin/sale/orders'],
+            },
           ],
         },
         {
@@ -51,15 +72,21 @@ export const MENUITEM = [
           icon: 'pi pi-fw pi-users',
           items: [
             {
-              label: 'Product Report',
+              label: 'Trial Balance',
               icon: 'pi pi-fw pi-list',
-              routerLink: ['/comunity/add'],
+              routerLink: ['/admin/report/trial-balance'],
             },
             {
-              label: 'Transactions',
+              label: 'Income Statement',
               icon: 'pi pi-fw pi-list',
-              routerLink: ['/comunity/list'],
-            }
+              routerLink: ['/admin/report/income-statement'],
+            },
+            
+            // {
+            //   label: 'Income Expense',
+            //   icon: 'pi pi-fw pi-list',
+            //   routerLink: ['/reports/income-expense'],
+            // }
           ],
         }
       ],

@@ -5,14 +5,19 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared/shared.module';
 import { MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
-
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { ToastModule } from 'primeng/toast';
+import { ListComponent } from './list/list.component';
 @NgModule({
-  declarations: [AddStockComponent],
+  declarations: [AddStockComponent, ListComponent],
   imports: [
     CommonModule,
     SharedModule,
+    MatSlideToggleModule,
+    ToastModule,
     RouterModule.forChild([
       { path: 'add-stock', component: AddStockComponent },
+      { path: 'orders', component: ListComponent },
     ]),
   ],
   providers: [MessageService, DialogService],

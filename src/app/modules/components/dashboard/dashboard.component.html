@@ -1,9 +1,15 @@
-<div class="container-fluid bg-white mt-3">
-</div>
+
+
 <h2>Dashboard</h2>
+<div class="mt-4 p-5 text-white rounded">
+  <app-gl-summary  class="contents"></app-gl-summary>
+</div>
 <div class="mt-4 p-5 text-white rounded">
   <h4>Track Order</h4>
   <!-- order-dashboard.component.html -->
+  <div *ngIf="orders?.length==0" class="card bg-secondary text-white mt-3">
+    <div class="card-body">No Order To Track</div>
+  </div>
   <div class="orders-container" *ngFor="let order of orders">
     <mat-card class="order-card">
       <mat-card-title>
@@ -50,9 +56,7 @@
             </div>
           </div>
         </div>
-
       </mat-card-content>
     </mat-card>
   </div>
-
 </div>

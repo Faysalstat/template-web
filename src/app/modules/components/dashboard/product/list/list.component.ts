@@ -33,7 +33,7 @@ export class ListComponent implements OnInit {
   fetchProductCategory(){
     this.categories = [{ label: 'Select Category', value: '' }];
     this.productService.fetchAllProductCategory().subscribe({
-      next:(res)=>{
+      next:(res:any)=>{
         if(res.body){
           let categoryList = res.body;
           categoryList.map((elem:any)=>{
@@ -56,8 +56,8 @@ export class ListComponent implements OnInit {
     params.set('categoryName', this.categoryName);
     params.set('code', this.code);
     this.productService.fetchAllProduct(params).subscribe({
-      next: (res) => {
-        if (res) {
+      next: (res:any) => {
+        if(res) {
           console.log(res.body)
           this.productList = res.body;
         }

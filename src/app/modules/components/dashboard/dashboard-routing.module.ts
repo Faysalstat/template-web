@@ -8,6 +8,8 @@ import { ConfigurationSettingComponent } from './configuration-setting/configura
         { path: '', component: DashboardComponent },
         { path: 'product', loadChildren: () => import('./product/product.module').then(m => m.ProductModule)},
         { path: 'inventory', loadChildren: () => import('./inventory/inventory.module').then(m => m.InventoryModule)},
+        { path: 'sale', loadChildren: () => import('./sale/sale.module').then(m => m.SaleModule)},
+        { path: 'report', loadChildren: () => import('./reports/reports.module').then(m => m.ReportsModule)},
         { path:'config',component: ConfigurationSettingComponent}
     ])],
     exports: [RouterModule]

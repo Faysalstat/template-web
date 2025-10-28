@@ -51,7 +51,7 @@ export class LoginComponent {
     };
     params.set("user",user);
     this.authService.signIn(params).subscribe({
-      next:(res)=>{
+      next:(res:any)=>{
         if(res.isSuccess){
           localStorage.setItem('token', res.body.token);
           localStorage.setItem('userId', res.body.userid);

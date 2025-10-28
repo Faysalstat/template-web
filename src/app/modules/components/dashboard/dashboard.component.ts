@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { OrderService } from '../../shared-services/order.service';
+import { GlSummaryComponent } from './dashboard-comps/gl-summary';
 interface Order {
+  id: number;
   orderNo: string;
   productCode: string;
   productName: string;
@@ -16,45 +18,23 @@ interface Order {
 }
 
 @Component({
-    templateUrl: './dashboard.component.html',
-    styleUrls: ['./dashboard.component.scss']
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.scss'],
 })
-
-export class DashboardComponent {
-
-orderStatuses = ["PENDING", "CONFIRMED", "SHIPPED", "DELIVERED", "CANCELLED"];
-
-  orders: Order[] = [
-    {
-      orderNo: 'ORD-1001',
-      productCode: 'P001',
-      productName: 'T-Shirt',
-      variant: 'Blue - XL',
-      quantity: 2,
-      deliveryType: 'Inside Dhaka',
-      address: 'Banani, Dhaka',
-      total: 1000,
-      shipping: 60,
-      discount: 10,
-      paymentType: 'COD',
-      status: 'PENDING'
-    },
-    {
-      orderNo: 'ORD-1002',
-      productCode: 'P002',
-      productName: 'Shoes',
-      variant: 'Black - 42',
-      quantity: 1,
-      deliveryType: 'Outside Dhaka',
-      address: 'Chittagong',
-      total: 2200,
-      shipping: 120,
-      discount: 0,
-      paymentType: 'COD',
-      status: 'CONFIRMED'
-    }
-  ];
-constructor(private orderService: OrderService) {}
+export class DashboardComponent implements OnInit {
+  orderStatuses = ['PENDING', 'CONFIRMED', 'SHIPPING', 'DELIVERED', 'CANCELLED'];
+  orders: Order[] = [];
+  constructor(private orderService: OrderService) {}
+  ngOnInit(): void {
+      this.getAllOrders();
+  };
+  getAllOrders(){
+    this.orderService.getAllSaleOrders().subscribe({
+      next:(res:any)=>{
+        this.orders = res.body;
+      }
+    })
+  }
   getDiscountedTotal(order: Order): number {
     return order.total + order.shipping - order.discount;
   }
@@ -72,12 +52,13 @@ constructor(private orderService: OrderService) {}
       this.orderService.updateStatus(order.orderNo, nextStatus).subscribe({
         next: () => {
           console.log(`Order ${order.orderNo} updated to ${nextStatus}`);
+          this.getAllOrders();
         },
-        error: (err) => {
+        error: (err:any) => {
           console.error('Failed to update order status', err);
           // rollback on error
           order.status = oldStatus;
-        }
+        },
       });
     }
   }

@@ -36,8 +36,8 @@ export class ProductsComponent {
     params.set('categoryName', this.categoryName);
     params.set('code', this.code);
     this.productService.fetchAllProduct(params).subscribe({
-      next: (res) => {
-        if (res) {
+      next: (res:any) => {
+        if(res) {
           console.log(res.body);
           this.products = res.body;
         }

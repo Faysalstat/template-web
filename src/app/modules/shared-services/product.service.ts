@@ -1,7 +1,7 @@
 import { HttpClient, HttpEvent, HttpEventType, HttpParams, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { ProductUrls } from '../components/dashboard/product/service/urls';
+import { ProductUrls } from 'src/app/utils/urls.const';
 
 @Injectable({
   providedIn: 'root'

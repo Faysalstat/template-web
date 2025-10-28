@@ -1,0 +1,80 @@
+<div class="row p-4">
+  <div class="col-md-12">
+    <h2>Income Statement (Profit & Loss)</h2>
+    <hr>
+    <h4>
+        Net Profit = (Sales Revenue + Shipping Income + Discount Income + Other Income)
+             - (COGS + ShippingExp + DiscountExp + OtherExp)
+    </h4>
+    <hr>
+    <hr>
+  </div>
+  <div class="col-md-6">
+    <table class="table table-stripe mt-4 ">
+        <thead>
+            <tr>
+                <th>Sales Revenue</th>
+                <th>{{totalSalesRevenue}}</th>
+            </tr>
+            <tr>
+                <th>Shipping Income</th>
+                <th>{{totalShippingIncome}}</th>
+            </tr>
+            <tr>
+                <th>Discount Income</th>
+                <th>{{totalDiscountIncome}}</th>
+            </tr>
+            <tr>
+                <th>Other Income</th>
+                <th>{{totalOtherIncome}}</th>
+            </tr>
+            <tr style="font-size: 1.5em;">
+                <th>Total:</th>
+                <th>{{totalSalesRevenue + totalShippingIncome + totalDiscountIncome + totalOtherIncome}}</th>
+            </tr>
+        </thead>
+    </table>
+  </div>
+  <div class="col-md-6">
+    <table class="table table-stripe mt-4 ">
+        <thead>
+            
+            <tr>
+                <th>COGS (Cost of Goods Sold)</th>
+                <th>{{totalCOGS}}</th>
+            </tr>
+            <tr>
+                <th>Shipping Expenses</th>
+                <th>{{totalShippingExpenses}}</th>
+            </tr>
+            <tr>
+                <th>Total Discounts Given</th>
+                <th>{{totalDiscountsExpenses}}</th>
+            </tr>
+            <tr>
+                <th>Other Expenses</th>
+                <th>{{totalOtherExpenses}}</th>
+            </tr>
+            <tr style="font-size: 1.5em;">
+                <th>Total:</th>
+                <th>{{totalCOGS + totalShippingExpenses + totalDiscountsExpenses + totalOtherExpenses}}</th>
+            </tr>
+        </thead>
+        
+    </table>
+  </div>
+  <div class="col-md-6">
+    <table class="table table-stripe mt-4 ">
+        <thead>
+            <tr style="font-size: 1.5em;">
+                <th>
+                    Net Profit/Loss
+                </th>
+                <td>
+                    {{(totalSalesRevenue + totalShippingIncome + totalDiscountIncome + totalOtherIncome) - (totalCOGS + totalShippingExpenses + totalDiscountsExpenses + totalOtherExpenses)}}
+                </td>
+            </tr>
+        </thead>
+    </table>
+  </div>
+</div>

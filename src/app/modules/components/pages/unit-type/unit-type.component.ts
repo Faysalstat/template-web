@@ -27,7 +27,7 @@ export class UnitTypeComponent implements OnInit {
     }
     params.set("model",model);
     this.productService.addUnitType(params).subscribe({
-      next:(res)=>{
+      next:(res:any)=>{
         if(res.body){
           this.unitType = '';
           this.notificationService.showMessage("SUCCESS",res.message,"OK",500);
@@ -38,7 +38,7 @@ export class UnitTypeComponent implements OnInit {
   }
   fetchUnitType(){
     this.productService.fetchAllUnitType().subscribe({
-      next:(res)=>{
+      next:(res:any)=>{
         if(res.body){
           this.unitTypes = res.body;
           
@@ -50,7 +50,7 @@ export class UnitTypeComponent implements OnInit {
   }
   deleteItem(id:any){
     this.productService.deleteUnitType(id).subscribe({
-      next:(res)=>{
+      next:(res:any)=>{
         if(res.isSuccess){
           console.log("Successfully Deleted");
           this.notificationService.showErrorMessage("SUCCESS","Deleted Item","Ok",500);

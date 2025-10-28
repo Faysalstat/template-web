@@ -27,7 +27,7 @@ export class ProductCategoryComponent implements OnInit {
     }
     params.set("model",model);
     this.productService.addProductCategory(params).subscribe({
-      next:(res)=>{
+      next:(res:any)=>{
         if(res.body){
           this.category = '';
           this.notificationService.showMessage("SUCCESS",res.message,"OK",500);
@@ -39,7 +39,7 @@ export class ProductCategoryComponent implements OnInit {
 
   fetchProductCategory(){
     this.productService.fetchAllProductCategory().subscribe({
-      next:(res)=>{
+      next:(res:any)=>{
         if(res.body){
           this.categories = res.body;
         }else{
@@ -50,7 +50,7 @@ export class ProductCategoryComponent implements OnInit {
   }
   deleteItem(id:any){
     this.productService.deleteProductCategory(id).subscribe({
-      next:(res)=>{
+      next:(res:any)=>{
         if(res.isSuccess){
           console.log("Successfully Deleted");
           this.notificationService.showErrorMessage("SUCCESS","Deleted Item","Ok",500);

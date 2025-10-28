@@ -60,7 +60,7 @@ export class AddComponent implements OnInit {
   }
   fetchProductById(id: any) {
     this.productService.fetchProductById(id).subscribe({
-      next: (res) => {
+      next: (res:any) => {
         console.log(res);
         if (res.body) {
           this.product = res.body;
@@ -68,7 +68,7 @@ export class AddComponent implements OnInit {
           this.productAddingForm.get('productCode')?.disable();
         }
       },
-      error: (err) => {
+      error: (err:any) => {
         this.notificationService.showMessage(
           'ERROR',
           'Error Occured',
@@ -96,7 +96,7 @@ export class AddComponent implements OnInit {
   fetchPackagingCategory() {
     this.packagingCategories = [{ label: 'Select category', value: '' }];
     this.productService.fetchAllPackagingCategory().subscribe({
-      next: (res) => {
+      next: (res:any) => {
         let categories = res.body;
         if (res.body) {
           categories.map((elem: any) => {
@@ -105,7 +105,7 @@ export class AddComponent implements OnInit {
           });
         }
       },
-      error: (err) => {
+      error: (err:any) => {
         this.notificationService.showMessage(
           'FAILED!',
           'Packaging Category Fetching Failed',
@@ -133,7 +133,7 @@ export class AddComponent implements OnInit {
     params.set('product', productModel);
     console.log(productModel);
     this.productService.addProduct(params).subscribe({
-      next: (res) => {
+      next: (res:any) => {
         if (res.isUpdated) {
           this.productAddingForm.reset();
           this.productImageUrl =
@@ -159,7 +159,7 @@ export class AddComponent implements OnInit {
         }
         // this.route.navigate(["/admin/product-list"]);
       },
-      error: (err) => {
+      error: (err:any) => {
         this.notificationService.showMessage(
           'FAILED!',
           'Product Add Failed',
@@ -196,7 +196,7 @@ export class AddComponent implements OnInit {
   fetchProductCategory() {
     this.categories = [{ label: 'Select Category', value: '' }];
     this.productService.fetchAllProductCategory().subscribe({
-      next: (res) => {
+      next: (res:any) => {
         if (res.body) {
           let categoryList = res.body;
           categoryList.map((elem: any) => {
@@ -218,7 +218,7 @@ export class AddComponent implements OnInit {
   fetchUnitType() {
     this.units = [{ label: 'Select Unit Type', value: '' }];
     this.productService.fetchAllUnitType().subscribe({
-      next: (res) => {
+      next: (res:any) => {
         if (res.body) {
           let unitList = res.body;
           unitList.map((elem: any) => {
@@ -242,7 +242,7 @@ export class AddComponent implements OnInit {
     params.set('name', '');
     if (!this.isEdit) {
       this.productService.fetchProductByCode(params).subscribe({
-        next: (res) => {
+        next: (res:any) => {
           if (res.isExist) {
             this.productAddingForm.get('productName')?.disable();
             this.productAddingForm.get('productCategory')?.disable();
@@ -273,7 +273,7 @@ export class AddComponent implements OnInit {
   fetchBrandName() {
     this.brandNames = [{ label: 'Select Brand Name', value: '' }];
     this.productService.fetchAllBrandName().subscribe({
-      next: (res) => {
+      next: (res:any) => {
         if (res.body) {
           let brandNames = res.body;
           brandNames.map((elem: any) => {
@@ -303,7 +303,7 @@ export class AddComponent implements OnInit {
 
     this.isUploading = true;
     this.productService.uploadFile(this.selectedFile).subscribe({
-      next: (res) => {
+      next: (res:any) => {
         if (!res) return;
         this.productImageUrl = `${BASE_URL + res.filePath}`; // 👈 backend response path
         this.isUploading = false;
@@ -315,7 +315,7 @@ export class AddComponent implements OnInit {
           300
         );
       },
-      error: (err) => {
+      error: (err:any) => {
         console.error('Upload failed:', err);
         this.isUploading = false;
       },

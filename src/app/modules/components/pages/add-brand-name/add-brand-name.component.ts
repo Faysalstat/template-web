@@ -27,7 +27,7 @@ export class AddBrandNameComponent implements OnInit {
     }
     params.set("model",model);
     this.productService.addBrnadName(params).subscribe({
-      next:(res)=>{
+      next:(res:any)=>{
         if(res.body){
           this.brandName = '';
           this.notificationService.showMessage("SUCCESS",res.message,"OK",500);
@@ -38,7 +38,7 @@ export class AddBrandNameComponent implements OnInit {
   }
   fetchBrandNames(){
     this.productService.fetchAllBrandName().subscribe({
-      next:(res)=>{
+      next:(res:any)=>{
         if(res.body){
           this.brandNames = res.body;
           
@@ -50,7 +50,7 @@ export class AddBrandNameComponent implements OnInit {
   }
   deleteItem(id:any){
     this.productService.deleteUnitType(id).subscribe({
-      next:(res)=>{
+      next:(res:any)=>{
         if(res.isSuccess){
           console.log("Successfully Deleted");
           this.notificationService.showErrorMessage("SUCCESS","Deleted Item","Ok",500);

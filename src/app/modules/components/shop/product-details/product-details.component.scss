@@ -11966,3 +11966,61 @@ textarea.form-control {
   width: 100%;
   height: auto;
 }
+
+/* Dialog inner layout */
+.dialog-content {
+  text-align: center;
+  padding: 1.5rem;
+}
+
+/* Success icon styling */
+.success-icon {
+  font-size: 3rem;
+  color: #4caf50;
+  margin-bottom: 1rem;
+}
+
+/* Header and text */
+.dialog-content h2 {
+  color: #333;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.dialog-content .message {
+  color: #666;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.dialog-content .order-id {
+  font-size: 1rem;
+  color: #444;
+  margin-bottom: 1.5rem;
+}
+
+/* Button alignment */
+.button-group {
+  display: flex;
+  justify-content: center;
+}
+
+/* Optional: custom PrimeNG dialog header style */
+.p-dialog .p-dialog-header {
+  background-color: #f9fafb;
+  color: #333;
+  font-weight: 600;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Optional: shadow & rounded corners */
+.p-dialog {
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+.dialog-header-center {
+  width: 100%;
+  text-align: center;
+  font-weight: 600;
+  font-size: 1.2rem;
+}

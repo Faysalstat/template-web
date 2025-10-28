@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { NotificationService } from 'src/app/modules/shared-services/notification-service.service';
 import { ProductService } from 'src/app/modules/shared-services/product.service';
+import { InventoryService } from 'src/app/modules/shared-services/stock.service';
 
 interface Product {
   id: number;
@@ -42,12 +44,14 @@ export class AddStockComponent implements OnInit {
   categoryName: string = '';
   code: string = '';
   showLoader = false;
+  isPaid: boolean = false;
   // Mock data - replace with your actual data source
   products: Product[] = [];
   constructor(
     private fb: FormBuilder,
     private productService: ProductService,
-    private notificationService: NotificationService,
+    private messageService: MessageService,
+    private inventoryService: InventoryService,
     private route: Router
   ) {
     this.stockForm = this.createForm();
@@ -71,6 +75,7 @@ export class AddStockComponent implements OnInit {
       otherCost: [0],
       otherCostReason: [''],
       totalCost: [{ value: 0, disabled: true }],
+      isPaid: [false],
     });
     stockUpdateForm
       .get('costPricePerUnit')!
@@ -160,7 +165,6 @@ export class AddStockComponent implements OnInit {
     const discount = this.stockForm.get('discount')!.value || 0;
     const shippingCost = this.stockForm.get('shippingCost')!.value || 0;
     const otherCost = this.stockForm.get('otherCost')!.value || 0;
-
     const totalCost = totalPrice - discount + shippingCost + otherCost;
     this.stockForm.get('totalCost')!.setValue(totalCost);
   }
@@ -173,8 +177,8 @@ export class AddStockComponent implements OnInit {
     params.set('categoryName', this.categoryName);
     params.set('code', this.code);
     this.productService.fetchAllProduct(params).subscribe({
-      next: (res) => {
-        if (res) {
+      next: (res:any) => {
+        if(res) {
           console.log(res.body);
           this.products = res.body;
         }
@@ -183,12 +187,47 @@ export class AddStockComponent implements OnInit {
   }
   onSubmit(): void {
     if (this.stockForm.valid) {
-      const formValue = {
-        ...this.stockForm.getRawValue(),
+      const formValue = { ...this.stockForm.getRawValue() };
+      const payload = {
+        productId: formValue.selectedProduct.id,
+        supplier: formValue.supplier,
         variants: this.variants.getRawValue(),
+        totalQuantity: formValue.totalQuantity || 0,
+        costPricePerUnit: formValue.costPricePerUnit || 0,
+        totalPrice: formValue.totalPrice || 0,
+        discount: formValue.discount || 0,
+        shippingCost: formValue.shippingCost || 0,
+        otherCost: formValue.otherCost || 0,
+        otherCostReason: formValue.otherCostReason || 0,
+        totalCost: formValue.totalCost || 0,
+        isPaid: formValue.isPaid,
       };
-      console.log('Form submitted:', formValue);
+      console.log('Form submitted:', payload);
       // Handle form submission here
+      this.inventoryService.addStock(payload).subscribe({
+        next: (res:any) => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: 'Stock Added Successfully',
+          });
+          this.stockForm.reset();
+        },
+        error: (err:any) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: 'Operation Failed: ' + err.message,
+          });
+        },
+      });
+    } else {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'Invalid Form',
+      });
+      return;
     }
   }
 }

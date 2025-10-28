@@ -16,6 +16,9 @@ import { ButtonModule } from 'primeng/button';
 import { TagModule } from 'primeng/tag';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from 'src/material.module';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
+import { DialogModule } from 'primeng/dialog';
 
 @NgModule({
   declarations: [
@@ -39,8 +42,11 @@ import { MaterialModule } from 'src/material.module';
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
+    ToastModule,
+    DialogModule
 
   ],
+  providers:[MessageService],
   exports:[HeaderComponent]
 })
 export class ShopModule {}
