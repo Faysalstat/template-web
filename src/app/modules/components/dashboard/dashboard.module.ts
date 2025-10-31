@@ -14,6 +14,7 @@ import { PagesModule } from '../pages/pages.module';
 import { ConfigurationSettingComponent } from './configuration-setting/configuration-setting.component';
 import { OrderComponent } from '../shop/order/order.component';
 import { GlSummaryComponent } from './dashboard-comps/gl-summary';
+import { CurrencyFormatDirective } from 'src/app/directives/currency-format.directive';
 
 @NgModule({
     imports: [

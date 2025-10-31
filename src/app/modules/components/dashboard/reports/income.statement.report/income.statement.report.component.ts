@@ -14,7 +14,8 @@ export class IncomeStatementReportComponent implements OnInit{
   totalCOGS: number = 0;
   totalShippingExpenses: number = 0;
   totalDiscountsExpenses: number = 0;
-  totalOtherExpenses: number = 0
+  totalOtherExpenses: number = 0;
+  totalInvestment:number = 0;
 
   constructor(private reportsService: ReportsService) {}
 
@@ -34,6 +35,7 @@ export class IncomeStatementReportComponent implements OnInit{
         this.totalShippingExpenses = reportData.totalShippingExpenses || 0;
         this.totalDiscountsExpenses = reportData.totalDiscountsExpenses || 0;
         this.totalOtherExpenses = reportData.totalOtherExpenses || 0;
+        this.totalInvestment = reportData.totalInvestment || 0;
       },
       error: (error) => {
         console.error('Error fetching income statement data:', error);

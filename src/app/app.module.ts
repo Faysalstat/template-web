@@ -13,6 +13,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from 'src/material.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ClientInterceptor } from './interseptor/client.interceptor';
+import { RequestInterceptor } from './interseptor/request.interceptor';
+import { CurrencyFormatDirective } from './directives/currency-format.directive';
 
 @NgModule({
   declarations: [AppComponent, NotfoundComponent],
@@ -24,6 +26,7 @@ import { ClientInterceptor } from './interseptor/client.interceptor';
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },
+    { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ClientInterceptor,

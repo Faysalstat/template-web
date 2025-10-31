@@ -8,6 +8,7 @@ import { DialogService } from 'primeng/dynamicdialog';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { ToastModule } from 'primeng/toast';
 import { ListComponent } from './list/list.component';
+import { TableModule } from 'primeng/table';
 @NgModule({
   declarations: [AddStockComponent, ListComponent],
   imports: [
@@ -15,6 +16,7 @@ import { ListComponent } from './list/list.component';
     SharedModule,
     MatSlideToggleModule,
     ToastModule,
+    TableModule,
     RouterModule.forChild([
       { path: 'add-stock', component: AddStockComponent },
       { path: 'orders', component: ListComponent },

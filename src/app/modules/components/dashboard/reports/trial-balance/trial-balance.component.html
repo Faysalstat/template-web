@@ -7,10 +7,9 @@
   <div class="col-md-12 overflow-auto mt-3">
     <table class="table table-stripe mt-4 ">
       <thead>
-        <th style="width:5%;">SN</th>
         <th style="width:10%; text-align: left;">Account Name</th>
-        <th style="width:20%;">Debit</th>
-        <th style="width:10%;">Credit</th>
+        <th style="text-align: right;">Debit</th>
+        <th style="text-align: right;">Credit</th>
         <!-- <th style="width:10%;">Balance</th> -->
       </thead>
       <tbody>
@@ -20,21 +19,20 @@
           </td>
         </tr>
         <tr *ngFor="let account of accounts; index as i">
-          <td>{{i+offset+1}}</td>
           <td style="width:10%; text-align: left;">{{account?.accountName}}</td>
-          <td>{{account?.debitAmount}}</td>
-          <td>{{account?.creditAmount}}</td>
+          <td [currency]="account?.debitAmount"></td>
+          <td [currency]="account?.creditAmount"></td>
           <!-- <td>{{account?.balance}}</td> -->
         </tr>
       </tbody>
       <tfoot>
         <tr>
-          <th style="text-align: right;" colspan="3">Total Debit</th>
-          <th>{{totalDebit}}</th>
+          <th style="text-align: right;" colspan="2">Total Debit</th>
+          <th style="text-align: right;">{{totalDebit}}</th>
         </tr>
         <tr>
-          <th style="text-align: right;" colspan="3">Total Credit</th>
-          <th>{{totalCredit}}</th>
+          <th style="text-align: right;" colspan="2">Total Credit</th>
+          <th style="text-align: right;">{{totalCredit}}</th>
         </tr>
       </tfoot>
     </table>

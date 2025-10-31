@@ -14,23 +14,23 @@
         <thead>
             <tr>
                 <th>Sales Revenue</th>
-                <th>{{totalSalesRevenue}}</th>
+                <th [currency]="totalSalesRevenue"></th>
             </tr>
             <tr>
                 <th>Shipping Income</th>
-                <th>{{totalShippingIncome}}</th>
+                <th [currency]="totalShippingIncome"></th>
             </tr>
             <tr>
                 <th>Discount Income</th>
-                <th>{{totalDiscountIncome}}</th>
+                <th [currency]="totalDiscountIncome"></th>
             </tr>
             <tr>
                 <th>Other Income</th>
-                <th>{{totalOtherIncome}}</th>
+                <th [currency]="totalOtherIncome"></th>
             </tr>
             <tr style="font-size: 1.5em;">
                 <th>Total:</th>
-                <th>{{totalSalesRevenue + totalShippingIncome + totalDiscountIncome + totalOtherIncome}}</th>
+                <th [currency]="totalSalesRevenue + totalShippingIncome + totalDiscountIncome + totalOtherIncome"></th>
             </tr>
         </thead>
     </table>
@@ -41,23 +41,23 @@
             
             <tr>
                 <th>COGS (Cost of Goods Sold)</th>
-                <th>{{totalCOGS}}</th>
+                <th [currency]="totalCOGS"></th>
             </tr>
             <tr>
                 <th>Shipping Expenses</th>
-                <th>{{totalShippingExpenses}}</th>
+                <th [currency]="totalShippingExpenses"></th>
             </tr>
             <tr>
                 <th>Total Discounts Given</th>
-                <th>{{totalDiscountsExpenses}}</th>
+                <th [currency]="totalDiscountsExpenses"></th>
             </tr>
             <tr>
                 <th>Other Expenses</th>
-                <th>{{totalOtherExpenses}}</th>
+                <th [currency]="totalOtherExpenses"></th>
             </tr>
             <tr style="font-size: 1.5em;">
                 <th>Total:</th>
-                <th>{{totalCOGS + totalShippingExpenses + totalDiscountsExpenses + totalOtherExpenses}}</th>
+                <th [currency]="totalCOGS + totalShippingExpenses + totalDiscountsExpenses + totalOtherExpenses"></th>
             </tr>
         </thead>
         
@@ -68,10 +68,15 @@
         <thead>
             <tr style="font-size: 1.5em;">
                 <th>
+                    Total Investment
+                </th>
+                <td [currency]="totalInvestment">
+                </td>
+            <tr style="font-size: 1.5em;">
+                <th>
                     Net Profit/Loss
                 </th>
-                <td>
-                    {{(totalSalesRevenue + totalShippingIncome + totalDiscountIncome + totalOtherIncome) - (totalCOGS + totalShippingExpenses + totalDiscountsExpenses + totalOtherExpenses)}}
+                <td [currency]="(totalSalesRevenue + totalShippingIncome + totalDiscountIncome + totalOtherIncome) - (totalCOGS + totalShippingExpenses + totalDiscountsExpenses + totalOtherExpenses)">
                 </td>
             </tr>
         </thead>

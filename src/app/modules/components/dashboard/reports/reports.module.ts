@@ -9,6 +9,10 @@ import { TableModule } from 'primeng/table';
 import { MaterialModule } from 'src/material.module';
 import { RouterModule } from '@angular/router';
 import { TrialBalanceComponent } from './trial-balance/trial-balance.component';
+import { InventoryValuationReportComponent } from './inventory.valuation.report/inventory.valuation.report.component';
+import { SaleReportComponent } from './sale.report/sale.report.component';
+import { StockReportComponent } from './stock.report/stock.report.component';
+import { CurrencyFormatDirective } from 'src/app/directives/currency-format.directive';
 
 
 
@@ -19,16 +23,25 @@ import { TrialBalanceComponent } from './trial-balance/trial-balance.component';
     IncomeStatementReportComponent,
     BalancesheetReportComponent,
     TransactionReportComponent,
-    TrialBalanceComponent
+    TrialBalanceComponent,
+    InventoryValuationReportComponent,
+    SaleReportComponent,
+    StockReportComponent,
+    
   ],
   imports: [
     CommonModule,
     TableModule,
     MaterialModule,
+    CurrencyFormatDirective,
     RouterModule.forChild([
       { path: 'trial-balance', component: TrialBalanceComponent },
       { path: 'income-statement', component: IncomeStatementReportComponent },
+      { path: 'sale-report', component: SaleReportComponent },
+      { path: 'stock-report', component: StockReportComponent },
+      { path: 'product-inventory-valuation', component: InventoryValuationReportComponent },
     ]),
   ],
+  
 })
 export class ReportsModule {}

@@ -44,7 +44,7 @@ export class AddStockComponent implements OnInit {
   categoryName: string = '';
   code: string = '';
   showLoader = false;
-  isPaid: boolean = false;
+  isPaid: boolean = true;
   // Mock data - replace with your actual data source
   products: Product[] = [];
   constructor(
@@ -75,7 +75,7 @@ export class AddStockComponent implements OnInit {
       otherCost: [0],
       otherCostReason: [''],
       totalCost: [{ value: 0, disabled: true }],
-      isPaid: [false],
+      isPaid: [true],
     });
     stockUpdateForm
       .get('costPricePerUnit')!

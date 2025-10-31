@@ -1,35 +1,34 @@
 <div class="row p-4">
     <div class="col-md-12">
-        <h2>Sale Orders</h2>
+        <h2>Stock Report</h2>
         <hr>
     </div>
     <div class="col-md-12">
-        <p-table [value]="orders" [tableStyle]="{ 'min-width': '50rem' }">
+        <p-table [value]="reportData" [tableStyle]="{ 'min-width': '50rem' }">
             <ng-template pTemplate="header">
                 <tr>
-                    <th>Order No</th>
-                    <th>Customer</th>
+                    <th>Date</th>
                     <th>Product</th>
+                    <th>Quantity</th>
                     <th style="text-align: right;">Total Amount</th>
                     <th style="text-align: right;">Discount</th>
                     <th style="text-align: right;">Shipping Cost</th>
-                    <th style="text-align: right;">Amount Receivable</th>
-                    <th>Status</th>
+                    <th style="text-align: right;">Amount Payable</th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-order>
                 <tr>
-                    <td>{{ order.orderNo }}</td>
-                    <td>{{ order.customerName }}</td>
-                    <td>({{ order.productCode }})- {{order.productName}} ({{order.variantName}})</td>
+                    <td>{{ formatDateLocalized(order.orderDate) }}</td>
+                    <td>({{ order.productCode }})- {{order.productName}}</td>
+                    <td>{{ order.quantityOrdered }}</td>
                     <td [currency]="order.totalAmount || 0"></td>
                     <td [currency]="order.discount || 0"></td>
                     <td [currency]="order.shippingCost || 0"></td>
-                    <td [currency]="order.amountReceivable || 0"></td>
-                    <td>{{ order.status }}</td>
+                    <td [currency]="order.amountPayable || 0"></td>
+                    <!-- <td>{{ order.details }}</td> -->
                 </tr>
             </ng-template>
         </p-table>
     </div>
 </div>
-    
+        

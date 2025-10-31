@@ -1,26 +1,27 @@
-<div class="container mt-3">
-  <h2>Stock History</h2>
-  <p>Sale Order List with Filters:</p>            
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th>SN</th>
-        <th>OrderNo</th>
-        <th>Supplier</th>
-        <th>Product Name</th>
-        <th>Quantity</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let order of orders;index as i">
-        <td>{{i+1}}</td>
-        <td>{{order.orderNo}}</td>
-        <td>{{order.supplier}}</td>
-        <td>{{order.productName}}</td>
-        <td>{{order.quantity}}</td>
-        <td>View</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+<div class="row p-4">
+  <div class="col-md-12">
+    <h2>Supply History</h2>
+    <hr>
+  </div>
+  <div class="col-md-12">
+    <p-table [value]="orders" [tableStyle]="{ 'min-width': '50rem' }">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>OrderNo</th>
+          <th>Supplier</th>
+          <th>Product Name</th>
+          <th>Quantity</th>
+          <th>Action</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-order>
+        <tr>
+          <td>{{order.orderNo}}</td>
+          <td>{{order.supplier}}</td>
+          <td>{{order.productName}}</td>
+          <td>{{order.quantity}}</td>
+          <td>View</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>

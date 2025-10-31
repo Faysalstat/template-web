@@ -21,4 +21,16 @@ export class ReportsService {
   getTransactionReport():Observable<any> {
     return this.http.get(ReportUrls.getTransactionReport);
   }
+
+  getProductReport():Observable<any> {
+    return this.http.get(ReportUrls.getProductReport);
+  }
+
+  getSaleReport():Observable<any> {
+    return this.http.get(ReportUrls.getSaleReport);
+  }
+
+  getStockReport():Observable<any> {
+    return this.http.get(ReportUrls.getStockReport);
+  }
 }

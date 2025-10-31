@@ -12,6 +12,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { AutoCompleteModule } from 'primeng/autocomplete';
+import { TableModule } from 'primeng/table';
+import { CurrencyFormatDirective } from 'src/app/directives/currency-format.directive';
 
 @NgModule({
   declarations: [ListComponent, PosComponent],
@@ -25,6 +27,8 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
     ToastModule,
     AutoCompleteModule,
     ReactiveFormsModule,
+    TableModule,
+    CurrencyFormatDirective,
     RouterModule.forChild([
       { path: 'pos', component: PosComponent },
       { path: 'orders', component: ListComponent },

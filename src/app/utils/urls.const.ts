@@ -64,4 +64,7 @@ export const ReportUrls = {
   getTransactionReport: BASE_URL + '/report/get-transaction-report',
   getTrialBalanceReport: BASE_URL + '/report/get-account-balance',
   getIncomeExpenseReport: BASE_URL + '/report/get-income-expense-report',
+  getProductReport: BASE_URL + '/report/get-product-report',
+  getSaleReport: BASE_URL + '/report/get-sale-report',
+  getStockReport: BASE_URL + '/report/get-stock-report',
 };

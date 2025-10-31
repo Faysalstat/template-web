@@ -136,6 +136,7 @@ export class AddComponent implements OnInit {
       next: (res:any) => {
         if (res.isUpdated) {
           this.productAddingForm.reset();
+          this.variants = [];
           this.productImageUrl =
             BASE_URL + '/uploads/default-featured-image.png';
           this.notificationService.showMessage(
@@ -146,6 +147,7 @@ export class AddComponent implements OnInit {
           );
         } else {
           this.productAddingForm.reset();
+          this.variants = [];
           this.productImageUrl =
             BASE_URL + '/uploads/default-featured-image.png';
           this.notificationService.showMessage(

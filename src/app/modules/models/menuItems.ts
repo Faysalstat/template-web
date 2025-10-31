@@ -81,6 +81,21 @@ export const MENUITEM = [
               icon: 'pi pi-fw pi-list',
               routerLink: ['/admin/report/income-statement'],
             },
+            {
+              label: 'Inventory Valuation',
+              icon: 'pi pi-fw pi-list',
+              routerLink: ['/admin/report/product-inventory-valuation'],
+            },
+            {
+              label: 'Sale Report',
+              icon: 'pi pi-fw pi-list',
+              routerLink: ['/admin/report/sale-report'],
+            },
+            {
+              label: 'Stock Report',
+              icon: 'pi pi-fw pi-list',
+              routerLink: ['/admin/report/stock-report'],
+            }
             
             // {
             //   label: 'Income Expense',

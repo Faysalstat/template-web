@@ -5,19 +5,19 @@ import { ListComponent } from './list/list.component';
 import { UpdateComponent } from './update/update.component';
 import { MaterialModule } from 'src/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { PageLoaderComponent } from '../../page-loader/page-loader.component';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
+import { TableModule } from 'primeng/table';
+import { CurrencyFormatDirective } from "src/app/directives/currency-format.directive";
 
 @NgModule({
   declarations: [
     AddComponent,
     ListComponent,
-    UpdateComponent,
-    PageLoaderComponent
+    UpdateComponent
   ],
   imports: [
     CommonModule,
@@ -26,12 +26,14 @@ import { DialogService } from 'primeng/dynamicdialog';
     FormsModule,
     ReactiveFormsModule,
     ToastModule,
+    TableModule,
     RouterModule.forChild([
-            { path: 'list', component: ListComponent },
-            { path: 'add', component: AddComponent },
-            { path: 'update/:id', component: AddComponent },
-        ])
-  ],
+        { path: 'list', component: ListComponent },
+        { path: 'add', component: AddComponent },
+        { path: 'update/:id', component: AddComponent },
+    ]),
+    CurrencyFormatDirective
+],
   providers: [MessageService,DialogService],
 })
 export class ProductModule { }

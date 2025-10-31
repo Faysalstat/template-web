@@ -14,9 +14,16 @@ export class ListComponent implements OnInit {
   }
   getAllOrders() {
     this.orderService.getAllSaleOrders().subscribe({
-      next: (res:any) => {
+      next: (res: any) => {
         this.orders = res.body;
       },
     });
+  }
+  formatDateLocalized(dateString: string, locale: string = 'en-GB'): string {
+    const date = new Date(dateString);
+    return new Intl.DateTimeFormat(locale, {
+      dateStyle: 'medium',
+      timeStyle: 'short',
+    }).format(date);
   }
 }
